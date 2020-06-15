@@ -13,10 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
+//index wth login
+Route::get('/', 'GuestController@index');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// create a new entry
+Route::get('/entries/create', 'EntryController@create')->name('entries_create');
+// save data from new entry to try to insert
+Route::post('/entries', 'EntryController@store');
+// show all entries from a user logged
+Route::get('/home', 'HomeController@index')->name('my_entries');
+// show an entry by user logged
+Route::get('/entries/{entry}', 'GuestController@show');
+// edit an entry by user logged
+Route::get('/entries/{entry}/edit', 'EntryController@edit');
+// edit an entry
+Route::put('/entries/{entry}', 'EntryController@update');
+// see the user's profile
+Route::get('/users/{user}', 'UserController@show');
