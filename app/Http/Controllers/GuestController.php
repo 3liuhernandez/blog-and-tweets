@@ -17,9 +17,11 @@ class GuestController extends Controller
         return view('welcome', compact('entries'));
     }
 
-    public function show(Entry $entry)
+    public function show(Entry $entryBySlug)
     {
     	//dd($entry->id);
-    	return view('entries.show', compact('entry'));
+    	return view('entries.show', [
+    	    'entry'=> $entryBySlug
+        ]);
     }
 }

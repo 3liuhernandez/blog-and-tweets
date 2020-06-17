@@ -24,7 +24,7 @@ Route::post('/entries', 'EntryController@store');
 // show all entries from a user logged
 Route::get('/home', 'HomeController@index')->name('my_entries');
 // show an entry by user logged
-Route::get('/entries/{entry}', 'GuestController@show');
+Route::get('/entries/{entryBySlug}', 'GuestController@show');
 // edit an entry by user logged
 Route::get('/entries/{entry}/edit', 'EntryController@edit');
 // edit an entry

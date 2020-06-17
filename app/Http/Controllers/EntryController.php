@@ -35,7 +35,8 @@ class EntryController extends Controller
     	return back()->with(compact('status'));
     }
 
-    public function edit(Entry $entry){
+    public function edit(Entry $entry)
+    {
         return view('entries.edit', compact('entry'));
     }
 

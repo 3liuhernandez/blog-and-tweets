@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Entry;
+use App\Exceptions\InvalidEntrySlugException;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -30,9 +32,21 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
+
+        Route::bind('entryBySlug', function ($value) {
+            $parts_of_url = explode('-', $value);
+            $id_of_url = end($parts_of_url);
+
+            //return Entry::findOrFail($id_of_url);
+            $entry = Entry::findOrFail($id_of_url);
+
+            if($entry->slug.'-'.$entry->id === $value){
+                return $entry;
+            } else{
+                throw new InvalidEntrySlugException($entry);
+            }
+        });
     }
 
     /**
